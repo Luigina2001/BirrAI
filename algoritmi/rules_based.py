@@ -28,13 +28,26 @@ def controllo_categoria_ricetta(categoria):
     return False
 
 
-# controllo che l'ingrediente selezionato sia della giusta categoria
+'''# controllo che l'ingrediente selezionato sia della giusta categoria
 def controllo_categoria_ingrediente(categoria, nome_ingrediente, tabella):
     for index, row in tabella.iterrows():
         if (row['name'].lower() == pd.Series(nome_ingrediente).astype(str).str.lower()).any() and (
                 row['category'].lower() == categoria.lower()):
             return True
-    return False
+    return False'''
+
+
+# controllo che l'ingrediente selezionato sia della giusta categoria
+def controllo_categoria_ingrediente(categoria, nome_ingrediente, tabella):
+    categoria_lower = categoria.lower()
+    nome_ingrediente_lower = nome_ingrediente.lower()
+
+    # query di Pandas per filtrare il dataframe
+    risultati = tabella[(tabella['category'].str.lower() == categoria_lower) &
+                        (tabella['name'].str.lower() == nome_ingrediente_lower)]
+
+    # se ci sono risultati, significa che l'ingrediente è della categoria corretta
+    return not risultati.empty
 
 
 # seleziono una riga del dataset di ingredienti passato come argomento alla funzione
@@ -63,6 +76,7 @@ def ottieni_ingrediente(dataset, categoria, tipologia_ingrediente):
 # creazione della ricetta di birra in base alla categoria passata come argomento alla funzione
 def crea_ricetta(categoria):
     recipe = {}
+
     while True:
         recipe["hops1"] = ottieni_ingrediente(hops, categoria, 'hops')
         if controllo_categoria_ingrediente(categoria, recipe["hops1"], hops):
@@ -73,7 +87,7 @@ def crea_ricetta(categoria):
             break
 
     # IPA: birra ad alta fermentazione caratterizzata dall’impiego di una grande quantità di luppoli
-    if (categoria.lower() == "ipa") or (categoria.lower() == "india pale ale"):
+    if categoria.lower() == "ipa":
         while True:
             recipe["hops3"] = ottieni_ingrediente(hops, categoria, 'hops')
             if controllo_categoria_ingrediente(categoria, recipe["hops3"], hops):

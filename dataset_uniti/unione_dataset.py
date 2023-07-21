@@ -29,7 +29,8 @@ def disegna_grafico(dataset, numeric_columns, algoritmo):
     ax.grid(color='gray', linestyle='dashed', linewidth=0.5, alpha=0.7)
 
     # etichette assi
-    ax.set_xticklabels(numeric_columns)
+    #ax.set_xticklabels(numeric_columns)
+    ax.set_xticklabels(numeric_columns, rotation=45, ha='right')
     ax.set_ylabel('Valore')
     ax.set_title('Boxplot dopo ' + algoritmo + ' normalization')
 
@@ -98,30 +99,30 @@ if 'recipe_id' in numeric_columns:
     numeric_columns = numeric_columns.drop('recipe_id')
 
 # [1]Boxplot prima del feature scaling
-'''for col in numeric_columns:
-    values = dataset[col].values  # Estraggo i valori della colonna
+for col in numeric_columns:
+    values = merged_data[col].values  # Estraggo i valori della colonna
     plt.plot(values, label=col)  # Crea un grafico a linea dei valori
 
-plt.xlim(0, 100)
-plt.ylim(0, 100)
+#plt.xlim(0, 100)
+#plt.ylim(0, 100)
 plt.legend()
 plt.title('Boxplot prima del feature scaling')
-plt.show()'''
+plt.show()
 
 # Z-score normalization
 scaler = StandardScaler()
 merged_data[numeric_columns] = scaler.fit_transform(merged_data[numeric_columns])
 
 # [3]Boxplot dopo z-score normalization
-#disegna_grafico(merged_data, numeric_columns, "z-score")
+disegna_grafico(merged_data, numeric_columns, "z-score")
 
 
 
 # ------------------------------- FEATURE SELECTION -------------------------------
 
 nomi_campi = merged_data.columns
-#print("\nNomi dei campi prima del feature selection")
-#print(nomi_campi)
+print("\nNomi dei campi prima del feature selection")
+print(nomi_campi)
 
 non_numeric_columns = merged_data.select_dtypes(include=['object', 'bool']).columns
 # aggiungo la colonna "recipe_id" se non presente
@@ -140,9 +141,9 @@ feature_indices = selector.get_support(indices=True)
 selected_features = [feature for i, feature in enumerate(numeric_columns) if i in feature_indices]
 
 # nomi delle feature selezionate
-'''print("Feature selezionate:")
+print("Feature selezionate:")
 for feature in selected_features:
-    print(feature)'''
+    print(feature)
 
 # creo un nuovo dataset con le sole feature selezionate
 dataset_new = merged_data[selected_features].copy()
@@ -155,20 +156,18 @@ merged_data= dataset_new
 #print(merged_data)
 
 nomi_campi = merged_data.columns
-#print("\nNomi dei campi dopo del feature selection")
-#print(nomi_campi)
-#eliminato il campo [YEASTS]_amount
-#eliminare anche [YEASTS]_amount_is_weight?
+print("\nNomi dei campi dopo del feature selection")
+print(nomi_campi)   # nessun campo eliminato
 
 
 # ------------------------------- DATA BALANCING (Undersampling) in base alla colonna category -------------------------------
-'''
+
 # numero di campioni per ogni categoria
 category_counts = merged_data['category'].value_counts()
 print(category_counts)
 # numero minimo di campioni tra le categorie
-min_count = category_counts.min()
-'''
+#min_count = category_counts.min()
+
 
 '''
 # Undersampling

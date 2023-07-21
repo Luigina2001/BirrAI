@@ -120,7 +120,7 @@ for col in numeric_columns:
     values = dataset[col].values     # estraggo i valori della colonna
     plt.plot(values, label=col)      # creo un grafico a linea dei valori
 
-plt.xlim(0, 100)
+#plt.xlim(0, 100)
 plt.ylim(-10, 100)
 plt.legend()
 plt.title('Boxplot prima del feature scaling')

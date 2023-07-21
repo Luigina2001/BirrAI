@@ -12,7 +12,7 @@ dataset = pd.read_csv('../dataset_uniti/ricette.csv')
 # parametri dell'algoritmo genetico
 size_popolazione = 50
 generazioni = 10
-elite_size = 5
+size_mating_pool = 5
 mutation_rate = 0.1
 
 # funzione per calcolare il punteggio di una ricetta
@@ -103,10 +103,10 @@ def crea_popolazione_iniziale():
         popolazione.append(recipe)
     return popolazione
 
-# funzione per selezionare una parte dell'elite dalla popolazione
-def seleziona_elite_popolazione(popolazione, elite_size):
+# funzione per selezionare il mating pool dalla popolazione
+def seleziona_mating_pool_popolazione(popolazione, size_mating_pool):
     popolazione_ordinata = sorted(popolazione, key=lambda x: calcola_punteggio(x), reverse=True)
-    return popolazione_ordinata[:elite_size]
+    return popolazione_ordinata[:size_mating_pool]
 
 # funzione per eseguire l'operazione di crossover su due genitori per creare un figlio
 def crossover(parent1, parent2):
@@ -148,13 +148,13 @@ def mutazione(ricetta):
 
 # funzione per calcolare la prossima generazione di ricette
 def calcola_generazione_successiva(popolazione):
-    elite_popolazione = seleziona_elite_popolazione(popolazione, elite_size)
+    mating_pool = seleziona_mating_pool_popolazione(popolazione, size_mating_pool)
 
-    generazione_successiva = elite_popolazione.copy()
+    generazione_successiva = mating_pool.copy()
 
     while len(generazione_successiva) < size_popolazione:
-        parent1 = random.choice(elite_popolazione)
-        parent2 = random.choice(elite_popolazione)
+        parent1 = random.choice(mating_pool)
+        parent2 = random.choice(mating_pool)
 
         figlio = crossover(parent1, parent2)
         figlio = mutazione(figlio)

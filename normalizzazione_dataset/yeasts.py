@@ -99,18 +99,29 @@ print("Totale valori mancanti prima del data cleaning:", total_missing)
 columns_to_drop = ['attenuation', 'flocculation', 'laboratory', 'max_temperature', 'min_temperature', 'product_id']
 dataset = dataset.drop(columns_to_drop, axis=1)
 
-# elimino le righe con valori nulli nelle colonne form e type
-dataset = dataset.dropna(subset=['form', 'type'])
+# elimino le righe con valori nulli nelle colonne form, type e name
+dataset = dataset.dropna(subset=['form', 'type', 'name'])
 
+'''
 # most frequent imputation colonna name
 most_frequent_value = dataset['name'].mode()[0]     # calcolo il valore più frequente nella colonna name
 print("most frequent value colonna name: " + most_frequent_value)
 # sostituisco i valori nulli con il valore più frequente
-dataset['name'].fillna(most_frequent_value, inplace=True)
+dataset['name'].fillna(most_frequent_value, inplace=True)'''
+
+
 
 # riempimento valori nulli colonna amount_is_weight
 amount_is_not_weight= False
 dataset['amount_is_weight'].fillna(amount_is_not_weight, inplace=True)
+
+numero_righe = len(dataset[dataset['name'] == '- -'])
+print("Numero di righe in cui il campo 'nome' è uguale a '- -':", numero_righe) #11.945
+numero_totale_di_righe= len(dataset)
+print("Numero totale di righe: ", numero_totale_di_righe) #152.772
+
+# Eliminazione di righe in cui il nome è nullo
+dataset = dataset[dataset['name'] != '- -']
 
 # [VERIFICA] ricalcolo i valori mancanti per colonna
 missing_values = dataset.isnull().sum().sum()
@@ -130,19 +141,36 @@ numeric_columns = dataset.select_dtypes(include=[np.number]).columns
 if 'recipe_id' in numeric_columns:
     numeric_columns = numeric_columns.drop('recipe_id')
 
+numeric_columns= numeric_columns.drop('version')
 
 # [1]Boxplot prima del feature scaling
 for col in numeric_columns:
     values = dataset[col].values     #estraggo i valori della colonna
     plt.plot(values, label=col)      # creo un grafico a linea dei valori
 
-plt.xlim(0, 50)
-plt.ylim(0, 50)
+#plt.xlim(0, 50000)
+#plt.ylim(0, 50)
 plt.legend()
 plt.title('Boxplot prima del feature scaling')
 plt.show()
 
+numeric_columns= dataset.select_dtypes(include=[np.number]).columns
+numeric_columns= numeric_columns.drop('recipe_id')
+numeric_columns= numeric_columns.drop('amount')
 
+# [1]Boxplot prima del feature scaling
+for col in numeric_columns:
+    values = dataset[col].values     #estraggo i valori della colonna
+    plt.plot(values, label=col)      # creo un grafico a linea dei valori
+
+#plt.xlim(0, 50000)
+#plt.ylim(0, 50)
+plt.legend()
+plt.title('Boxplot prima del feature scaling')
+plt.show()
+
+numeric_columns= dataset.select_dtypes(include=[np.number]).columns
+numeric_columns= numeric_columns.drop('recipe_id')
 
 # Min-Max normalization
 '''min_max_scaler = preprocessing.MinMaxScaler()
@@ -194,14 +222,6 @@ for column in non_numeric_columns:
     dataset_new[column] = dataset[column]
 
 dataset = dataset_new
-
-numero_righe = len(dataset[dataset['name'] == '- -'])
-#print("Numero di righe in cui il campo 'nome' è uguale a '--':", numero_righe) #11.945
-numero_totale_di_righe= len(dataset)
-#print("Numero totale di righe: ", numero_totale_di_righe) #152.772
-
-# Eliminazione di righe in cui il nome è nullo
-dataset = dataset[dataset['name'] != '- -']
 
 #print(dataset)
 dataset.to_csv("../dataset_cleaned/yeasts_dataset_cleaned.csv", index=False)

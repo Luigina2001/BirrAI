@@ -3,14 +3,11 @@
     in base alle loro caratteristiche, aprendo la possibilità di scoprire nuove combinazioni.
 """
 import pandas as pd
-import numpy as np
-from matplotlib import cm
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+import seaborn as sns
 from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
-from sklearn.metrics import pairwise_distances, silhouette_score, silhouette_samples
-from sklearn.model_selection import train_test_split
 
 
 dataset = pd.read_csv("../dataset_uniti/ricette.csv")
@@ -62,7 +59,24 @@ for i, recipe in enumerate(new_recipes):
     for feature, value in recipe.items():
         print(f"{feature}: {label_encoders[feature].inverse_transform([int(value)])}")
 
+# ---------------------------------- Plot dei cluster ----------------------------------
+'''# Riduzione della dimensionalità con PCA
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X)
 
+# Plot dei cluster
+colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', 'purple']
+
+for cluster in range(num_clusters):
+    recipes_in_cluster = dataset[dataset['cluster_label'] == cluster]
+    plt.scatter(X_pca[labels == cluster, 0], X_pca[labels == cluster, 1], c=colors[cluster], label=f"Cluster {cluster + 1}")
+
+plt.xlabel('PCA Component 1')
+plt.ylabel('PCA Component 2')
+plt.title("Plot dei cluster con PCA")
+plt.legend()
+plt.show()
+'''
 
 # ---------------------------------- Elbow point ----------------------------------
 elbow_scores = []
