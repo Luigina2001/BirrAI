@@ -7,6 +7,7 @@
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import LabelEncoder
+import pickle
 
 dataset = pd.read_csv('../dataset_uniti/ricette.csv')
 pd.set_option('display.max_columns', None)
@@ -103,15 +104,15 @@ def combina_ricette(ricette):
     return nuova_ricetta
 
 
-recipe_id = 83392.0     # id di una ricetta presente nel dataset
+recipe_id = 24695.0     # id di una ricetta presente nel dataset
 print("\nRicetta di partenza:")
-print(dataset[dataset['recipe_id'] == recipe_id][['recipe_id', 'name']])
+print(dataset[dataset['recipe_id'] == recipe_id][feature][['recipe_id', 'name']])
 
 print('\n------------------------------------------------------------------\n')
 
 ricette_simili = consiglia_ricette_birra(recipe_id, num_recommendations=5)
 print(f"Ricette consigliate per la ricetta con id {recipe_id} :")
-print(ricette_simili[['recipe_id', 'name']])
+print(ricette_simili[feature][['recipe_id', 'name']])
 
 print('\n------------------------------------------------------------------\n')
 

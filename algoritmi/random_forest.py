@@ -16,14 +16,14 @@ dataset = pd.read_csv('../dataset_uniti/ricette.csv')
 # definizione delle features e del target
 features = ['batch_size', 'boil_size', 'boil_time', 'efficiency', 'est_abv',
        'category', 'display_batch_size', 'display_boil_size', 'name', 'type',
-       'recipe_id', '[HOPS]_alpha', '[HOPS]_amount', '[HOPS]_time',
+       '[HOPS]_alpha', '[HOPS]_amount', '[HOPS]_time',
        '[HOPS]_form', '[HOPS]_name', '[HOPS]_use', '[HOPS]_user_hop_use',
        '[FERMENTABLES]_amount', '[FERMENTABLES]_color', '[FERMENTABLES]_yield',
        '[FERMENTABLES]_add_after_boil', '[FERMENTABLES]_name',
        '[FERMENTABLES]_type', '[YEASTS]_amount', '[YEASTS]_amount_is_weight',
-       '[YEASTS]_form', '[YEASTS]_name', '[YEASTS]_type', '[MISCS]_amount',
-       '[MISCS]_amount_is_weight', '[MISCS]_name', '[MISCS]_type',
-       '[MISCS]_use']
+       '[YEASTS]_form', '[YEASTS]_name', '[YEASTS]_type']#, '[MISCS]_amount',
+       #'[MISCS]_amount_is_weight', '[MISCS]_name', '[MISCS]_type',
+       #'[MISCS]_use']
 
 target = "ibu"  # attributo target da prevedere
 
@@ -41,7 +41,7 @@ for feature in features:
 train_data, test_data = train_test_split(dataset, test_size=0.2, random_state=42)
 
 # creazione del modello
-model = RandomForestRegressor(n_estimators=100, max_depth=10)
+model = RandomForestRegressor(n_estimators=100, max_depth=30)
 
 # addestramento del modello
 X_train = train_data[features]  # selezione delle features del set di addestramento
@@ -62,23 +62,8 @@ print("Accuracy:", accuracy)
 # errore medio assoluto (Mean Absolute Error, MAE)
 y_pred = model.predict(X_test)
 mae = sum(abs(y_test - y_pred)) / len(y_test)
-print("Mean Absolute Error:", mae)
+print("Mean Absolute Error (MAE):", mae)
 
 # errore quadratico medio (Mean Squared Error, MSE)
 mse = sum((y_test - y_pred) ** 2) / len(y_test)
-print("Mean Squared Error:", mse)
-
-'''
-# Trova gli indici degli esempi correttamente predetti
-correct_indices = (y_test - y_pred).abs() < 0.1  # Consideriamo corretta una predizione con errore inferiore a 0.1
-
-# Conta i valori corretti e errati
-num_correct = correct_indices.sum()
-num_wrong = len(y_test) - num_correct
-
-# Creazione del grafico a barre
-plt.bar(['Corretti', 'Errati'], [num_correct, num_wrong], color=['blue', 'red'], alpha=0.5)
-plt.xlabel('Predizione')
-plt.ylabel('Numero di Esempi')
-plt.title('Distribuzione dei Valori Predetti')
-plt.show()'''
+print("Mean Squared Error (MSE):", mse)

@@ -1,3 +1,4 @@
 *.csv
 test.py
-algoritmi/random_forest_no_test.py
+valutazione_modelli
+algoritmi/modello_random_forest.pkl
