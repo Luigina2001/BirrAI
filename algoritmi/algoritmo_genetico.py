@@ -11,7 +11,7 @@ dataset = pd.read_csv('../dataset_uniti/ricette.csv')
 
 # parametri dell'algoritmo genetico
 size_popolazione = 50
-generazioni = 10
+generazioni = 20
 size_mating_pool = 5
 mutation_rate = 0.1
 
@@ -52,7 +52,7 @@ def calcola_punteggio(ricetta):
     else:
         ibu_score = 1
 
-    # metrica 3: colore del mosto
+    # metrica 3: colore del malto
     color = ricetta['[FERMENTABLES]_color']
     color_score = 0
 
@@ -64,11 +64,11 @@ def calcola_punteggio(ricetta):
     elif color >= 15 and color < 20:
         color_score = 8
     elif color >= 10 and color <= 15:
-        color_score = 8
-    elif color >= 5 and color < 10:
         color_score = 5
-    else:
+    elif color >= 5 and color < 10:
         color_score = 2
+    else:
+        color_score = 1
 
     # punteggio totale
     score = (abv_score + ibu_score + color_score) / 3
