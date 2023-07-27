@@ -16,52 +16,56 @@ size_mating_pool = 5
 mutation_rate = 0.1
 
 # funzione per calcolare il punteggio di una ricetta
-#NOTA: valori da rivedere
 def calcola_punteggio(ricetta):
     # metrica 1: ABV (Alcohol By Volume)
     abv = ricetta['est_abv']
     abv_score = 0
 
-    # assegno un punteggio in base all'ABV desiderato
-    if abv >= 4.0 and abv <= 7.0:
+    # assegno un punteggio in base all'ABV desiderato, si predilige un grado alcolico più basso
+    # intervallo di valori assunti d'attributo --> [-3.501565; 23.863067]
+    if abv <= 2:
         abv_score = 10
-    elif abv >= 3.0 and abv < 4.0:
+    elif abv > 2 and abv <= 5:
         abv_score = 8
-    elif abv >= 7.0 and abv <= 9.0:
-       abv_score = 8
-    elif abv >= 2.0 and abv < 3.0:
+    elif abv > 5 and abv <= 9:
         abv_score = 5
+    elif abv > 9 and abv <= 15:
+        abv_score = 3
     else:
-        abv_score = 2
+        abv_score = 1
 
     # metrica 2: ibu
     ibu = ricetta['ibu']
     ibu_score = 0
 
     # assegno un punteggio in base all'ibu desiderato
-    if ibu >= 20 and ibu <= 50:
+    # intervallo di valori assunti d'attributo --> [-1.298474; 33.314285]
+    # si predilige un ibu più basso, quindi una birra più amara
+    if ibu >= 22:
         ibu_score = 10
-    elif ibu >= 10 and ibu < 20:
+    elif ibu >= 12 and ibu < 22:
         ibu_score = 8
-    elif ibu >= 50 and ibu <= 70:
-        ibu_score = 8
-    elif ibu >= 0 and ibu < 10:
+    elif ibu >= 6 and ibu < 12:
         ibu_score = 5
-    else:
+    elif ibu >= 0 and ibu < 6:
         ibu_score = 2
+    else:
+        ibu_score = 1
 
     # metrica 3: colore del mosto
     color = ricetta['[FERMENTABLES]_color']
     color_score = 0
 
-    # assegno un punteggio in base al colore desiderato
-    if color >= 5 and color <= 20:
+    # assegno un punteggio in base al colore desiderato [-0.399302; 30.996475]
+    # intervallo di valori assunti d'attributo --> [-0.399302; 30.996475]
+    # si predilige un colore più scuro
+    if color >= 20:
         color_score = 10
-    elif color >= 1 and color < 5:
+    elif color >= 15 and color < 20:
         color_score = 8
-    elif color >= 20 and color <= 30:
+    elif color >= 10 and color <= 15:
         color_score = 8
-    elif color >= 0 and color < 1:
+    elif color >= 5 and color < 10:
         color_score = 5
     else:
         color_score = 2
