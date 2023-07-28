@@ -6,6 +6,9 @@
 import pandas as pd
 import random
 import numpy as np
+import time
+
+start_time = time.time()
 
 dataset = pd.read_csv('../dataset_uniti/ricette.csv')
 
@@ -40,14 +43,14 @@ def calcola_punteggio(ricetta):
 
     # assegno un punteggio in base all'ibu desiderato
     # intervallo di valori assunti d'attributo --> [-1.298474; 33.314285]
-    # si predilige un ibu più basso, quindi una birra più amara
-    if ibu >= 22:
+    # si predilige un ibu più alto, quindi una birra più amara
+    if ibu >= 25:
         ibu_score = 10
-    elif ibu >= 12 and ibu < 22:
+    elif ibu >= 15 and ibu < 25:
         ibu_score = 8
-    elif ibu >= 6 and ibu < 12:
+    elif ibu >= 5 and ibu < 15:
         ibu_score = 5
-    elif ibu >= 0 and ibu < 6:
+    elif ibu >= 2 and ibu < 5:
         ibu_score = 2
     else:
         ibu_score = 1
@@ -56,16 +59,16 @@ def calcola_punteggio(ricetta):
     color = ricetta['[FERMENTABLES]_color']
     color_score = 0
 
-    # assegno un punteggio in base al colore desiderato [-0.399302; 30.996475]
+    # assegno un punteggio in base al colore desiderato
     # intervallo di valori assunti d'attributo --> [-0.399302; 30.996475]
-    # si predilige un colore più scuro
-    if color >= 20:
+    # si predilige un colore più chiaro
+    if color <= 5:
         color_score = 10
-    elif color >= 15 and color < 20:
+    elif color > 5 and color <= 10:
         color_score = 8
-    elif color >= 10 and color <= 15:
+    elif color > 10 and color <= 15:
         color_score = 5
-    elif color >= 5 and color < 10:
+    elif color > 15 and color <= 20:
         color_score = 2
     else:
         color_score = 1
@@ -177,5 +180,12 @@ for generazione in range(generazioni):
 
 # cerco la ricetta migliore nella popolazione finale
 miglior_ricetta = max(popolazione, key=lambda x: calcola_punteggio(x))
+punteggio_miglior_ricetta = calcola_punteggio(miglior_ricetta)
 print("Nuova ricetta generata:")
 print(miglior_ricetta)
+print(f"Punteggio della miglior ricetta: {punteggio_miglior_ricetta}")
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+
+print(f"\nTempo di esecuzione: {elapsed_time} secondi")
