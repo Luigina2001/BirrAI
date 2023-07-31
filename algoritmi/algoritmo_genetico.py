@@ -61,7 +61,7 @@ def calcola_punteggio(ricetta):
 
     # assegno un punteggio in base al colore desiderato
     # intervallo di valori assunti d'attributo --> [-0.399302; 30.996475]
-    # si predilige un colore più chiaro
+    # si predilige un colore più scuro
     if color <= 5:
         color_score = 10
     elif color > 5 and color <= 10:
@@ -173,15 +173,21 @@ def calcola_generazione_successiva(popolazione):
 
 # creazione di nuove ricette
 popolazione = crea_popolazione_iniziale()
+miglior_ricetta = max(popolazione, key=lambda x: calcola_punteggio(x))
+punteggio_miglior_ricetta = calcola_punteggio(miglior_ricetta)
+print("Punteggio della miglior ricetta Generazione 0:", punteggio_miglior_ricetta)
 
 for generazione in range(generazioni):
-    print(f"Generazione {generazione + 1}")
+    print(f"\nGenerazione {generazione + 1}")
     popolazione = calcola_generazione_successiva(popolazione)
+    miglior_ricetta = max(popolazione, key=lambda x: calcola_punteggio(x))
+    punteggio_miglior_ricetta = calcola_punteggio(miglior_ricetta)
+    print("Punteggio della miglior ricetta Generazione", generazione+1, " :", punteggio_miglior_ricetta)
 
 # cerco la ricetta migliore nella popolazione finale
 miglior_ricetta = max(popolazione, key=lambda x: calcola_punteggio(x))
 punteggio_miglior_ricetta = calcola_punteggio(miglior_ricetta)
-print("Nuova ricetta generata:")
+print("\nNuova ricetta generata:")
 print(miglior_ricetta)
 print(f"Punteggio della miglior ricetta: {punteggio_miglior_ricetta}")
 
