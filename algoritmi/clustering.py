@@ -154,3 +154,26 @@ plt.title("Coefficienti di Silhouette al variare del numero di cluster")
 plt.xlabel("Numero di cluster (K)")
 plt.ylabel("Coefficiente di Silhouette")
 plt.show()'''
+
+
+
+# ---------------------------- Numero elementi in ciascun cluster ----------------------------------------
+'''
+# numero di istanze in ogni cluster
+num_elements_in_cluster = [8030, 7106, 10004, 6011, 6187, 7051, 6117, 6494]
+
+# etichette dei cluster
+cluster_labels = ["Cluster 1", "Cluster 2", "Cluster 3", "Cluster 4", "Cluster 5", "Cluster 6", "Cluster 7", "Cluster 8"]
+
+# grafico a barre
+plt.figure(figsize=(10, 6))
+plt.bar(cluster_labels, num_elements_in_cluster, color='skyblue')
+plt.xlabel('Cluster')
+plt.ylabel('Numero di Elementi')
+plt.title('Numero di Elementi in Ciascun Cluster')
+plt.xticks(rotation=45)
+
+plt.tight_layout()
+plt.show()
+
+'''
