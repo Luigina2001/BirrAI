@@ -8,7 +8,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 import joblib
 from sklearn.preprocessing import LabelEncoder
-import matplotlib.pyplot as plt
+import random
+
 
 
 dataset = pd.read_csv('../dataset_uniti/ricette.csv')
@@ -66,4 +67,78 @@ print("Mean Absolute Error (MAE):", mae)
 
 # errore quadratico medio (Mean Squared Error, MSE)
 mse = sum((y_test - y_pred) ** 2) / len(y_test)
-print("Mean Squared Error (MSE):", mse)
+print("Mean Squared Error (MSE):", mse, "\n\n")
+
+# ------------------------ stampe risultati ------------------------
+
+# numero di esempi da visualizzare
+num_examples = 5
+
+# righe casuali dal set di test
+random_indices = random.sample(range(len(test_data)), num_examples)
+sample_data = test_data.iloc[random_indices]
+
+# seleziono solo le features per l'esempio
+X_sample = sample_data[features]
+
+# predizioni utilizzando il modello
+predictions = model.predict(X_sample)
+
+# confronto delle predizioni con i valori reali
+for i in range(num_examples):
+    real_value = sample_data.iloc[i][target]
+    predicted_value = predictions[i]
+    print(f"Esempio {i + 1}:")
+    print(f"IBU stimata: {predicted_value:.2f}")
+    print(f"IBU reale: {real_value:.2f}")
+    print("-" * 20)
+
+'''import matplotlib.pyplot as plt
+
+# Creazione del grafico di confronto
+plt.figure(figsize=(10, 6))
+plt.title("Confronto IBU stimati vs. IBU reali")
+plt.xlabel("Esempio")
+plt.ylabel("Valore IBU")
+plt.grid(True)
+
+# Etichette degli esempi
+labels = [f"Esempio {i + 1}" for i in range(num_examples)]
+
+# Valori stimati e reali dell'IBU per gli esempi selezionati
+predicted_values = predictions
+real_values = [sample_data.iloc[i][target] for i in range(num_examples)]
+
+# Plot dei valori predetti e reali
+plt.plot(labels, predicted_values, label="IBU stimati", marker="o")
+plt.plot(labels, real_values, label="IBU reali", marker="x")
+
+# Aggiungi legenda e mostra il grafico
+plt.legend()
+plt.tight_layout()
+plt.show()'''
+
+
+import matplotlib.pyplot as plt
+
+# valori stimati e reali dell'IBU per tutto il set di test
+predicted_values = y_pred
+real_values = y_test
+
+# grafico a dispersione
+plt.figure(figsize=(10, 6))
+plt.title("Confronto IBU stimati vs. IBU reali (Set di Test)")
+plt.xlabel("IBU stimati")
+plt.ylabel("IBU reali")
+plt.grid(True)
+
+# plot dei valori predetti rispetto ai valori reali
+plt.scatter(predicted_values, real_values, alpha=0.7, color='b')
+
+# linea diagonale per aiutare nella valutazione visiva
+plt.plot([-1.5, 1.5], [-1.5, 1.5], color='r', linestyle='--')
+
+plt.tight_layout()
+plt.show()
+
+
