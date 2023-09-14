@@ -76,12 +76,29 @@ print('-------------------------------------------------------------------------
 print(f"\nCoefficiente di silhouette: {silhouette_avg}")'''
 
 # indice di Davies-Bouldin
-davies_bouldin = davies_bouldin_score(X, labels)
+'''davies_bouldin = davies_bouldin_score(X, labels)
 print(f"\nIndice di Davies-Bouldin: {davies_bouldin}")
 
 # indice di Calinski-Harabasz
 calinski_harabasz = calinski_harabasz_score(X, labels)
-print(f"\nIndice di Calinski-Harabasz: {calinski_harabasz}")
+print(f"\nIndice di Calinski-Harabasz: {calinski_harabasz}")'''
+
+
+# ---------------------------------- Grafico centroidi ----------------------------------
+
+# coordinate dei centroidi dei cluster
+centroids = cluster_centers[:, 1:5]  # considero solo le colonne da 1 a 4 (corrispondenti a '[HOPS]_name', '[FERMENTABLES]_name', '[YEASTS]_name', '[MISCS]_name')
+
+# grafico a dispersione per visualizzare i centroidi
+plt.figure(figsize=(8, 6))
+plt.scatter(centroids[:, 0], centroids[:, 1], c='red', marker='x', s=100, label='Centroidi')
+plt.xlabel('[HOPS]_name')
+plt.ylabel('[FERMENTABLES]_name')
+plt.title('Centroidi dei Cluster')
+plt.legend()
+plt.grid(True)
+plt.show()
+
 
 # ---------------------------------- Grafico complessivo cluster ----------------------------------
 
@@ -97,7 +114,7 @@ fig = plt.figure(figsize=(14, 12))
 ax = fig.add_subplot(111, projection='3d')
 scatter = ax.scatter(X_pca[:, 0], X_pca[:, 1], X_pca[:, 2], c=cluster_labels, cmap='viridis', edgecolor='k', alpha=0.7)
 
-# Aggiungi la leggenda con il numero del cluster e il colore corrispondente
+# leggenda con il numero del cluster e il colore corrispondente
 legend = ax.legend(*scatter.legend_elements(), title="Cluster", loc='upper right', bbox_to_anchor=(1.18, 1), prop={'size': 15})
 ax.add_artist(legend)
 
