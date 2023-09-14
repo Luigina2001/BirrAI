@@ -3,9 +3,13 @@
   <img src="logo.PNG" alt="Logo del progetto" width="250" height="250" >
 </div>
 La produzione di birra artigianale ha una storia millenaria, ed è considerata uno dei processi più antichi al mondo. Nel corso dei secoli, le ricette e le conoscenze sono state tramandate, mentre la birra e i suoi processi di produzione sono stati oggetto di studio da parte di matematici, scienziati e chimici, portando a un continuo sviluppo e miglioramento.
+
 In contemporanea, i progressi nell’intelligenza artificiale (AI) hanno aperto nuove prospettive e opportunità per l’innovazione nelle ricette di birra e per il monitoraggio e il miglioramento dei processi produttivi e della qualità del prodotto finale.
+
 L’obiettivo principale di questa ricerca è stato sviluppare algoritmi di intelligenza artificiale per la generazione di nuove ricette di birra artigianale e per la predizione dell’attributo chimico IBU (International Bitterness Units). Sono state esplorate diverse metodologie, tra cui algoritmi genetici (GA), clustering con K-means, raccomandazioni basate sugli item e metodi basati su regole, oltre all’implementazione di Random Forest per la predizione dei valori di IBU.
+
 In particolare, l’approccio basato su GA è risultato efficace nell’esplorazione del panorama delle ricette e nell’identificazione di combinazioni di ingredienti non convenzionali, mentre l’uso di K-means e raccomandazioni basate sugli item ha agevolato il raggruppamento delle ricette in base a caratteristiche simili, favorendo la scoperta di nuove combinazioni. Nel contesto della previsione dei valori di IBU, l’approccio con Random Forest ha dimostrato un’accuratezza promettente, consentendo un maggiore controllo sul sapore amaro nelle birre.
+
 Questo progetto ha contribuito all’intersezione tra l’arte antica della produzione di birra artigianale e le moderne tecnologie dell’intelligenza artificiale, aprendo nuove vie per l’innovazione e l’esplorazione nel mondo della birra. L’applicazione di algoritmi AI per la generazione di ricette e la previsione degli attributi chimici promette di influenzare positivamente la creatività dei birrai e la qualità delle birre prodotte.
 
 ## Descrizione
