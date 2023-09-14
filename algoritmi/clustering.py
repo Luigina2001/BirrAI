@@ -91,7 +91,7 @@ centroids = cluster_centers[:, 1:5]  # considero solo le colonne da 1 a 4 (corri
 
 # grafico a dispersione per visualizzare i centroidi
 plt.figure(figsize=(8, 6))
-plt.scatter(centroids[:, 0], centroids[:, 1], c='red', marker='x', s=100, label='Centroidi')
+plt.scatter(centroids[:, 0], centroids[:, 1], c='red', marker='x', s=500, linewidths=5, label='Centroidi')
 plt.xlabel('[HOPS]_name')
 plt.ylabel('[FERMENTABLES]_name')
 plt.title('Centroidi dei Cluster')
