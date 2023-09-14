@@ -26,3 +26,57 @@ Il progetto è strutturato nel seguente modo:
 4. `dataset_uniti`: questa cartella contiene il dataset ottenuto combinando i cinque dataset originali e il relativo modulo unione_dataset.py.
 
 5. `normalizzazione_dataset`: questa cartella contiene i moduli per la normalizzazione dei dataset originali. Ogni modulo è specifico per un dataset e comprende le fasi di data cleaning, feature scaling, feature selection e data balancing.
+
+
+
+## Istruzioni per l'installazione
+
+Questo progetto è stato sviluppato utilizzando PyCharm. Per eseguire il progetto sul tuo ambiente locale, segui le seguenti istruzioni:
+
+1. **Clona il repository:** inizia clonando questo repository sul tuo computer utilizzando Git. Assicurati di aver già installato Git sul tuo sistema.
+
+3. **Ambiente virtuale (opzionale):** se lo desideri, puoi creare un ambiente virtuale Python per isolare le dipendenze del progetto.
+
+4. **Installazione delle dipendenze:** dopo aver attivato l'ambiente virtuale, installa le dipendenze necessarie.
+
+5. **Configurazione dei dataset:** poiché i dataset utilizzati non possono essere distribuiti a terzi, dovrai procurarti i dataset da fonti autorizzate e posizionarli nella cartella `dataset` del progetto. Assicurati che i file dei dataset abbiano la stessa struttura dei dataset originali utilizzati nel progetto.
+
+Con queste istruzioni, dovresti essere pronto per eseguire il progetto sul tuo ambiente locale.
+
+## Istruzioni per l'esecuzione
+
+Una volta completata l'installazione, puoi eseguire i vari moduli del progetto. Ecco come farlo per ciascun modulo:
+
+1. **Algoritmo basato su regole:**
+   ```
+   python algoritmi/rules_based.py
+   ```
+
+2. **Raccomandazioni basate sugli item:**
+   ```
+   python algoritmi/item-based-recommendation.py
+   ```
+
+3. **Algoritmo genetico:**
+   ```
+   python algoritmi/algoritmo_genetico.py
+   ```
+
+4. **Clustering K-means:**
+   ```
+   python algoritmi/clustering.py
+   ```
+
+5. **Predizione IBU con Random Forest:**
+   ```
+   python algoritmi/random_forest.py
+   ```
+
+6. **Apriori & FP-Growth:**
+   ```
+   python algoritmi/apriori_&_fp-growth.py
+   ```
+
+Assicurati di eseguire questi comandi dalla radice del progetto dopo aver attivato l'ambiente virtuale (se lo hai creato).
+
+Ricorda che, per ottenere risultati significativi, dovresti avere i dataset appropriati posizionati nella cartella `dataset`. Inoltre, esegui i moduli della cartella `normalizzazione_dataset` per riempire le cartelle `dataset_cleaned` e `dataset_uniti` con i relativi file appropriati.
