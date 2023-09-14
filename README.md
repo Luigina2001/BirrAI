@@ -1,4 +1,7 @@
 # BirrAI
+<div align="center">
+  <img src="logo.PNG" alt="Logo del progetto" width="250" height="250" >
+</div>
 La produzione di birra artigianale ha una storia millenaria, ed è considerata uno dei processi più antichi al mondo. Nel corso dei secoli, le ricette e le conoscenze sono state tramandate, mentre la birra e i suoi processi di produzione sono stati oggetto di studio da parte di matematici, scienziati e chimici, portando a un continuo sviluppo e miglioramento.
 In contemporanea, i progressi nell’intelligenza artificiale (AI) hanno aperto nuove prospettive e opportunità per l’innovazione nelle ricette di birra e per il monitoraggio e il miglioramento dei processi produttivi e della qualità del prodotto finale.
 L’obiettivo principale di questa ricerca è stato sviluppare algoritmi di intelligenza artificiale per la generazione di nuove ricette di birra artigianale e per la predizione dell’attributo chimico IBU (International Bitterness Units). Sono state esplorate diverse metodologie, tra cui algoritmi genetici (GA), clustering con K-means, raccomandazioni basate sugli item e metodi basati su regole, oltre all’implementazione di Random Forest per la predizione dei valori di IBU.
