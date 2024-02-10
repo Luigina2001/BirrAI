@@ -25,10 +25,10 @@ Il progetto è strutturato nel seguente modo:
    - `clustering.py`: questo modulo mira ad organizzare e generare ricette in base alle loro caratteristiche utilizzando l'algoritmo di clustering K-means, aprendo la possibilità di scoprire nuove combinazioni.
    - `random_forest.py`: questo modulo implementa un algoritmo random forest per predire il valore di IBU (Unità Internazionali di Amarezza) di una ricetta data.
    - `apriori_&_fp-growth.py`: questo modulo contiene gli algoritmi Apriori e FP-Growth per calcolare gli itemset frequenti e le relative regole di associazione.
-
+<!-- 
 2. `dataset`: questa cartella contiene i dataset originali utilizzati nel progetto.
 
-3. `dataset_cleaned`: questa cartella contiene la versione pulita dei dataset dopo la normalizzazione.
+3. `dataset_cleaned`: questa cartella contiene la versione pulita dei dataset dopo la normalizzazione.-->
 
 4. `dataset_uniti`: questa cartella contiene il dataset ottenuto combinando i cinque dataset originali e il relativo modulo unione_dataset.py.
 
