@@ -13,7 +13,7 @@ In particolare, l’approccio basato su GA è risultato efficace nell’esploraz
 Questo progetto ha contribuito all’intersezione tra l’arte antica della produzione di birra artigianale e le moderne tecnologie dell’intelligenza artificiale, aprendo nuove vie per l’innovazione e l’esplorazione nel mondo della birra. L’applicazione di algoritmi AI per la generazione di ricette e la previsione degli attributi chimici promette di influenzare positivamente la creatività dei birrai e la qualità delle birre prodotte.
 
 ## Descrizione
-Questo progetto consiste in cinque cartelle contenenti diversi moduli per la normalizzazione del dataset di partenza e per la scrittura di algoritmi di diversa natura per creare nuove ricette di birra.
+Questo progetto consiste in tre cartelle contenenti diversi moduli per la normalizzazione del dataset di partenza e per la scrittura di algoritmi di diversa natura per creare nuove ricette di birra.
 
 ## Struttura delle Cartelle
 Il progetto è strutturato nel seguente modo:
@@ -30,9 +30,9 @@ Il progetto è strutturato nel seguente modo:
 
 3. `dataset_cleaned`: questa cartella contiene la versione pulita dei dataset dopo la normalizzazione.-->
 
-4. `dataset_uniti`: questa cartella contiene il dataset ottenuto combinando i cinque dataset originali e il relativo modulo unione_dataset.py.
+2. `dataset_uniti`: questa cartella contiene il dataset ottenuto combinando i cinque dataset originali e il relativo modulo unione_dataset.py.
 
-5. `normalizzazione_dataset`: questa cartella contiene i moduli per la normalizzazione dei dataset originali. Ogni modulo è specifico per un dataset e comprende le fasi di data cleaning, feature scaling, feature selection e data balancing.
+3. `normalizzazione_dataset`: questa cartella contiene i moduli per la normalizzazione dei dataset originali. Ogni modulo è specifico per un dataset e comprende le fasi di data cleaning, feature scaling, feature selection e data balancing.
 
 
 
